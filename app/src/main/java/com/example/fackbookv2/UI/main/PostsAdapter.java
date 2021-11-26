@@ -13,44 +13,39 @@ import com.example.fackbookv2.pojo.PostModel;
 
 import java.util.ArrayList;
 import java.util.List;
-
 public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostViewHolder> {
-    private List<PostModel> postsList = new ArrayList<>();
+    private List<PostModel> moviesList = new ArrayList<>();
 
     @NonNull
     @Override
     public PostViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new PostViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.post_item,parent,false));
-}
+        return new PostViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.post_item, parent, false));
+    }
 
     @Override
     public void onBindViewHolder(@NonNull PostViewHolder holder, int position) {
-
-        holder.tvTitle.setText(postsList.get(position).getTitle());
-        holder.tvUser.setText(postsList.get(position).getUserId());
-        holder.tvBody.setText(postsList.get(position).getBody());
+        holder.titleTV.setText(moviesList.get(position).getTitle());
+        holder.userTV.setText(moviesList.get(position).getUserId()+"");
+        holder.bodyTV.setText(moviesList.get(position).getBody());
     }
 
     @Override
     public int getItemCount() {
-        return postsList.size();
+        return moviesList.size();
     }
 
-    public void setList(List<PostModel> postsList) {
-        this.postsList = postsList;
+    public void setList(List<PostModel> moviesList) {
+        this.moviesList = moviesList;
         notifyDataSetChanged();
     }
 
-public class PostViewHolder extends RecyclerView.ViewHolder {
-    TextView tvTitle,tvUser,tvBody;
-
-    public PostViewHolder(@NonNull View itemView) {
-
-        super(itemView);
-        tvTitle=itemView.findViewById(R.id.title);
-        tvUser=itemView.findViewById(R.id.userId);
-        tvBody=itemView.findViewById(R.id.body);
-
+    public class PostViewHolder extends RecyclerView.ViewHolder {
+        TextView titleTV, userTV, bodyTV;
+        public PostViewHolder(@NonNull View itemView) {
+            super(itemView);
+            titleTV = itemView.findViewById(R.id.title);
+            userTV = itemView.findViewById(R.id.userId);
+            bodyTV = itemView.findViewById(R.id.body);
+        }
     }
-}
 }

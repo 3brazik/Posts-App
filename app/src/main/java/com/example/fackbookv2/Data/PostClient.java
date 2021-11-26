@@ -10,6 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class PostClient {
     private final static String BASE_URl="https://jsonplaceholder.typicode.com";
+    private static PostClient INSTANC;
     private PostInterface postInterface;
     private static PostClient getInstance;
 
@@ -23,11 +24,11 @@ public class PostClient {
     }
 
     public static PostClient getGetInstance() {
-        if (getInstance==null){
-            getInstance=new PostClient();
+        if (null==INSTANC){
+            INSTANC=new PostClient();
 
         }
-        return getInstance;
+        return INSTANC;
     }
     public Call<List<PostModel>> getPosts (){
         return postInterface.getPosts();

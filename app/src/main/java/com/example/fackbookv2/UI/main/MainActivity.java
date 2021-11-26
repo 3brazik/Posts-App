@@ -16,23 +16,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-PostViewModel postViewModel;
-RecyclerView recyclerView;
+
+    PostViewModel postViewModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        postViewModel = ViewModelProviders.of(this).get(PostViewModel.class);
+
         postViewModel.getPosts();
-        postViewModel= ViewModelProviders.of(this).get(PostViewModel.class);
-     recyclerView =findViewById(R.id.recycler);
-     PostsAdapter postsAdapter=new PostsAdapter();
-     recyclerView.setLayoutManager(new LinearLayoutManager(this));
-     recyclerView.setAdapter(postsAdapter);
-     postViewModel.postsMutableLiveData.observe(this, new Observer<List<PostModel>>() {
-         @Override
-         public void onChanged(List<PostModel> postModels) {
-             postsAdapter.setList(postModels);
-         }
-     });
+        RecyclerView recyclerView = findViewById(R.id.recycler);
+        final PostsAdapter adapter = new PostsAdapter();
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
+
+
+        postViewModel.postsMutableLiveData.observe(this, new Observer<List<PostModel>>() {
+            @Override
+            public void onChanged(List<PostModel> postModels) {
+                adapter.setList(postModels);
+            }
+        });
+
     }
 }
